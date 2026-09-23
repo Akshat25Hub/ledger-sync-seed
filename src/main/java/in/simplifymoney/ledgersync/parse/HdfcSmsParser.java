@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
  * Two shapes are in production. The older one is a single sentence; the newer
  * one is multi-line and was rolled out partway through the window we have data
  * for. Both are handled here.
- *
  * Card messages ("spent on HDFC Bank Card x3310") are handled too - they quote
  * an available limit rather than an available balance.
  */

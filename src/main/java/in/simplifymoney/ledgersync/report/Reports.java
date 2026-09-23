@@ -70,7 +70,14 @@ public final class Reports {
     }
 
     public static Map<String, Object> reconciliation(List<NormalizedTxn> ledger) {
-        throw new UnsupportedOperationException("reconciliation is not implemented");
+        Map<String, Object> doc = new LinkedHashMap<>();
+        doc.put("count", ledger.size());
+        BigDecimal total = ledger.stream()
+                .map(NormalizedTxn::amount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2);
+        doc.put("totalAmount", total);
+        return doc;
     }
 
     public static Map<Category, BigDecimal> byCategory(List<NormalizedTxn> ledger) {

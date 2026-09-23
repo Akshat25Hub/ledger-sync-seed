@@ -60,7 +60,9 @@ public final class SqlLedgerStore implements LedgerStore, AutoCloseable {
                         if (rs.next()) continue;
                     }
                 }
-                String sql = Files.readString(f);
+                String sql = Files.readString(f).replace("\r\n", "\n");
+                // Remove SQL comments starting with --
+                sql = sql.replaceAll("(?m)--.*", "");
                 for (String stmt : sql.split(";")) {
                     if (!stmt.isBlank()) st.execute(stmt);
                 }
